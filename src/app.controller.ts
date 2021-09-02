@@ -6,28 +6,17 @@ import { valoresconversion } from './jsonformats/conversion.dto';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-  @Get('test')
-  getTest(): string{
-    return this.appService.getTest();
-  }
-  @Post('conversion')
-  convertirvalor(@Body() valor: valoresconversion){
-    console.log(valor);
-    return valor;
-}
+  //Ruta pregunta 1
   @Get('getConvertedAmount')
-  getConvertedAmount(@Param('from') from: string, @Param('to') to: string, @Param('amount') amount:number){
-    return from;
+  getConvertedAmount(@Query('from') from: string, @Query('to') to: string, @Query('amount') amount:number){
+    return this.appService.getConvertedAmount(from,to,amount);
   }
+  //Ruta pregunta 2
   @Get('getDaysUntilMyBirthday')
   getDaysUntilMyBirthday(@Query('birthday') birthday){
     return this.appService.getDaysUntilMyBirthday(birthday);
   }
+  //Ruta pregunta 3
   @Get('getTheNumber')
   getTheNumber(@Query('first') first, @Query ('second') second){
     return this.appService.getTheNumber(first,second);
